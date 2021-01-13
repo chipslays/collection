@@ -60,7 +60,7 @@ class Collection implements Countable
     }
 
     /**
-     * Get count of elemetns in colelction.
+     * Get count of items in collection.
      *
      * @return int
      */
@@ -81,7 +81,7 @@ class Collection implements Countable
     }
 
     /**
-     * Get colelction items as array. 
+     * Get collection items as array. 
      *
      * @return array
      */
@@ -91,7 +91,7 @@ class Collection implements Countable
     }
 
     /**
-     * Get colelction items as object. 
+     * Get collection items as object. 
      *
      * @return object
      */

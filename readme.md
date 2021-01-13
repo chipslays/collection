@@ -66,7 +66,7 @@ $hasEmail = $collection->has('user.email'); // false
 
 #### `count(): int`
 
-Get count of elemetns in colelction.
+Get count of items in collection.
 
 ```php
 use Chipslays\Collection\Collection;
@@ -91,7 +91,7 @@ $collection->clear();
 
 #### `toArray(): array`
 
-Get colelction items as array.
+Get collection items as array.
 
 ```php
 use Chipslays\Collection\Collection;
@@ -103,7 +103,7 @@ $collection->toArray();
 
 #### `toObject(): object`
 
-Get colelction items as object (stdClass). 
+Get collection items as object (stdClass). 
 
 ```php
 use Chipslays\Collection\Collection;
