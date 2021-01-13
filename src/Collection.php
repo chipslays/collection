@@ -12,6 +12,11 @@ class Collection implements Countable
      */
     protected $items = [];
 
+    /**
+     * Create collection.
+     * 
+     * @param array|object $array
+     */
     public function __construct($array = [])
     {
         $this->items = (array) $array;
