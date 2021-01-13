@@ -1,0 +1,23 @@
+{
+    "name": "chipslays/collection",
+    "description": "Library for manipulating array as collection.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "chipslays",
+            "email": "hello@chipslays.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Chipslays\\Collection\\": "src/"
+        }
+    },
+    "require": {
+        "chipslays/array": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
