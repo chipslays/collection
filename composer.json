@@ -12,7 +12,8 @@
     "autoload": {
         "psr-4": {
             "Chipslays\\Collection\\": "src/"
-        }
+        },
+        "files": ["helpers.php"]
     },
     "require": {
         "chipslays/array": "^1.0"

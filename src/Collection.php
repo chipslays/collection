@@ -4,6 +4,7 @@ namespace Chipslays\Collection;
 
 use Countable;
 use ArrayAccess;
+use stdClass;
 use Chipslays\Arr\Arr;
 
 class Collection implements Countable, ArrayAccess
@@ -13,9 +14,12 @@ class Collection implements Countable, ArrayAccess
      */
     protected $items = [];
 
-    public function __construct($array = [])
+    /**
+     * @param array|stdClass $array 
+     */
+    public function __construct($items = [])
     {
-        $this->items = (array) $array;
+        $this->items = (array) $items;
     }
 
     /**
