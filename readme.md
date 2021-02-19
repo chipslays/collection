@@ -1,6 +1,6 @@
 # 📂 Collection
 
-Library for manipulating array as collection.
+Library for manipulating array or object as collection.
 
 ## Installation
 
