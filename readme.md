@@ -64,12 +64,12 @@ $hasName = $collection->has('user.name'); // true
 $hasEmail = $collection->has('user.email'); // false
 ```
 
-### `each(callable $callback): Collection`
-### `map(callable $callback): Collection`
-### `mapWithKeys(callable $callback): Collection`
-### `filter(callable $callback = null): Collection`
-### `where($key, $operator = null, $value = null): Collection`
-### `all(): array`
+#### `each(callable $callback): Collection`
+#### `map(callable $callback): Collection`
+#### `mapWithKeys(callable $callback): Collection`
+#### `filter(callable $callback = null): Collection`
+#### `where($key, $operator = null, $value = null): Collection`
+#### `all(): array`
 
 #### `count(): int`
 
