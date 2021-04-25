@@ -29,7 +29,7 @@ class Collection implements Countable, ArrayAccess
      * @param mixed $default
      * @param string $separator
      * 
-     * @return $
+     * @return $mixed
      */
     public function get(string $key, $default = null, string $separator = '.')
     {
@@ -89,7 +89,7 @@ class Collection implements Countable, ArrayAccess
      * Execute a callback over each item.
      *
      * @param  callable  $callback
-     * @return $this
+     * @return Collection
      */
     public function each(callable $callback)
     {
