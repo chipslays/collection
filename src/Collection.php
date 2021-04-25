@@ -29,7 +29,7 @@ class Collection implements Countable, ArrayAccess
      * @param mixed $default
      * @param string $separator
      * 
-     * @return $mixed
+     * @return mixed
      */
     public function get(string $key, $default = null, string $separator = '.')
     {
