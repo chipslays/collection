@@ -1,5 +1,8 @@
 # 📂 Collection
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/chipslays/collection/Tests)
+![Packagist Version](https://img.shields.io/packagist/v/chipslays/collection)
+
 Library for manipulating array or object as collection.
 
 ## Installation
