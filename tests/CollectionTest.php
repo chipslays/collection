@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 use Chipslays\Collection\Collection;
 
-final class ArrTest extends TestCase
+final class CollectionTest extends TestCase
 {
     public function testCollectionGet()
     {
