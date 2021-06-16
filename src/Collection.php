@@ -2,10 +2,10 @@
 
 namespace Chipslays\Collection;
 
+use Chipslays\Arr\Arr;
 use Countable;
 use ArrayAccess;
 use stdClass;
-use Chipslays\Arr\Arr;
 
 class Collection implements Countable, ArrayAccess
 {
@@ -15,7 +15,7 @@ class Collection implements Countable, ArrayAccess
     protected $items = [];
 
     /**
-     * @param array|stdClass $array 
+     * @param array|stdClass $items
      */
     public function __construct($items = [])
     {
@@ -28,7 +28,7 @@ class Collection implements Countable, ArrayAccess
      * @param string $key
      * @param mixed $default
      * @param string $separator
-     * 
+     *
      * @return mixed
      */
     public function get(string $key, $default = null, string $separator = '.')
@@ -42,13 +42,23 @@ class Collection implements Countable, ArrayAccess
      * @param string $key
      * @param mixed $default
      * @param string $separator
-     * 
+     *
      * @return Collection
      */
-    public function set(string $key, $value = null, string $separator = '.')
+    public function set(string $key, $value = null, string $separator = '.'): Collection
     {
         Arr::set($this->items, $key, $value, $separator);
         return $this;
+    }
+
+    public function first()
+    {
+        return array_values($this->items)[0] ?? null;
+    }
+
+    public function last()
+    {
+        return $this->items !== [] ? end($this->items) : null;
     }
 
     /**
@@ -56,10 +66,10 @@ class Collection implements Countable, ArrayAccess
      *
      * @param string $key
      * @param string $separator
-     * 
-     * @return boolean
+     *
+     * @return bool
      */
-    public function has(string $key, string $separator = '.')
+    public function has(string $key, string $separator = '.'): bool
     {
         return Arr::has($this->items, $key, $separator);
     }
@@ -69,7 +79,7 @@ class Collection implements Countable, ArrayAccess
      *
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
@@ -79,7 +89,7 @@ class Collection implements Countable, ArrayAccess
      *
      * @return Collection
      */
-    public function clear()
+    public function clear(): Collection
     {
         $this->items = [];
         return $this;
@@ -91,7 +101,7 @@ class Collection implements Countable, ArrayAccess
      * @param  callable  $callback
      * @return Collection
      */
-    public function each(callable $callback)
+    public function each(callable $callback): Collection
     {
         foreach ($this->items as $key => $item) {
             if (call_user_func($callback, $item, $key) === false) {
@@ -108,7 +118,7 @@ class Collection implements Countable, ArrayAccess
      * @param  callable  $callback
      * @return static
      */
-    public function map(callable $callback)
+    public function map(callable $callback): Collection
     {
         $keys = array_keys($this->items);
 
@@ -125,7 +135,7 @@ class Collection implements Countable, ArrayAccess
      * @param  callable  $callback
      * @return static
      */
-    public function mapWithKeys(callable $callback)
+    public function mapWithKeys(callable $callback): Collection
     {
         $result = [];
 
@@ -146,7 +156,7 @@ class Collection implements Countable, ArrayAccess
      * @param  callable|null  $callback
      * @return static
      */
-    public function filter(callable $callback = null)
+    public function filter(callable $callback = null): Collection
     {
         if ($callback) {
             return new static(Arr::where($this->items, $callback));
@@ -163,7 +173,7 @@ class Collection implements Countable, ArrayAccess
      * @param  mixed  $value
      * @return static
      */
-    public function where($key, $operator = null, $value = null)
+    public function where($key, $operator = null, $value = null): Collection
     {
         if (func_num_args() === 1) {
             $value = true;
@@ -224,36 +234,90 @@ class Collection implements Countable, ArrayAccess
     }
 
     /**
-     * Get collection items as array. 
+     * Chunk the collection into chunks of the given size.
+     *
+     * @param int $size
+     * @return static
+     */
+    public function chunk($size)
+    {
+        if ($size <= 0) {
+            return new static;
+        }
+
+        $chunks = [];
+
+        foreach (array_chunk($this->items, $size, true) as $chunk) {
+            $chunks[] = new static($chunk);
+        }
+
+        return new static($chunks);
+    }
+
+    /**
+     * Get and remove the first item from the collection.
+     *
+     * @return mixed
+     */
+    public function shift()
+    {
+        return array_shift($this->items);
+    }
+
+    /**
+     * Reset the keys on the underlying array.
+     *
+     * @return static
+     */
+    public function values()
+    {
+        return new static(array_values($this->items));
+    }
+
+    /**
+     * @return static
+     */
+    public function keys()
+    {
+        return new static(array_keys($this->items));
+    }
+
+    /**
+     * Get collection items as array.
      *
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->toArray();
     }
 
     /**
-     * Get collection items as array. 
+     * Get collection items as array.
      *
-     * @return array
+     * @return string
      */
-    public function toJson($flags = JSON_PRETTY_PRINT)
+    public function toJson($flags = JSON_PRETTY_PRINT): string
     {
         return json_encode($this->items, $flags);
     }
 
     /**
-     * Get collection items as object. 
+     * Get collection items as object.
      *
      * @return object
      */
-    public function toObject()
+    public function toObject(): object
     {
         return (object) $this->items;
     }
 
-    public function toArray()
+    /**
+     * Get collection items as array.
+     *
+     * @return array
+     */
+    public function toArray(): array
     {
         return $this->items;
     }
