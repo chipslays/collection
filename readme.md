@@ -122,7 +122,12 @@ $collection = new Collection([
 $hasName = $collection->has('user.name'); // true
 $hasEmail = $collection->has('user.email'); // false
 ```
-
+#### `first()`
+#### `last()`
+#### `shift()`
+#### `values()`
+#### `keys()`
+#### `chunk(int $size)`
 #### `each(callable $callback): Collection`
 #### `map(callable $callback): Collection`
 #### `mapWithKeys(callable $callback): Collection`
@@ -169,7 +174,7 @@ $collection->toArray();
 
 #### `toObject(): object`
 
-Get collection items as object (stdClass). 
+Get collection items as object (stdClass).
 
 ```php
 use Chipslays\Collection\Collection;
@@ -202,6 +207,6 @@ Array
 
 * [`chipslays/array`](https://github.com/chipslays/array) - Simple library for array manipulate.
 
-## License 
+## License
 MIT
 
