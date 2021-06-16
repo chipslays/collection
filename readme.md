@@ -122,11 +122,11 @@ $collection = new Collection([
 $hasName = $collection->has('user.name'); // true
 $hasEmail = $collection->has('user.email'); // false
 ```
-#### `first()`
-#### `last()`
-#### `shift()`
-#### `values()`
-#### `keys()`
+#### `first(): mixed`
+#### `last(): mixed`
+#### `shift(): mixed`
+#### `values(): Collection`
+#### `keys(): Collection`
 #### `chunk(int $size)`
 #### `each(callable $callback): Collection`
 #### `map(callable $callback): Collection`
