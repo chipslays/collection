@@ -3,7 +3,9 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/chipslays/collection/Tests)
 ![Packagist Version](https://img.shields.io/packagist/v/chipslays/collection)
 
-Library for manipulating array or object as collection.
+Simple library for manipulating array or object as collection based on [`chipslays/array`](https://github.com/chipslays/array) library.
+
+> Supported dot-notation and asterisks rules.
 
 ## Installation
 
@@ -28,6 +30,60 @@ $collection = new Collection([
 
 $name = $collection->get('user.name'); // chipslays
 $email = $collection->get('user.email', 'default@email.com'); // default@email.com
+```
+
+```php
+$collection = collection([
+    'foo' => [
+        'bar' => ['baz' => 1],
+        'bam' => ['baz' => 2],
+        'boo' => ['baz' => 3],
+    ],
+]);
+
+$collection->get('foo.*.baz');
+// Array
+// (
+//     [0] => 1
+//     [1] => 2
+//     [2] => 3
+// )
+
+$collection->get('foo.*');
+// Array
+// (
+//     [0] => Array
+//         (
+//             [baz] => 1
+//         )
+//     [1] => Array
+//         (
+//             [baz] => 2
+//         )
+//     [2] => Array
+//         (
+//             [baz] => 3
+//         )
+// )
+```
+
+
+```php
+$collection = collection([
+    'foo' => [
+        'bar' => ['baz' => 1],
+    ],
+]);
+
+$collection->get('foo.*.baz');
+// 1
+
+$collection->get('foo.*');
+// Array
+// (
+//     [baz] => 1
+// )
+
 ```
 
 #### `set(string $key, $value = null [, string $separator = '.']): Collection`
@@ -141,4 +197,11 @@ Array
     [1] => two
 )
 ```
+
+## 👀 See also
+
+* [`chipslays/array`](https://github.com/chipslays/array) - Simple library for array manipulate.
+
+## License 
+MIT
 
