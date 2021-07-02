@@ -5,7 +5,9 @@
 
 Simple library for manipulating array or object as collection based on [`chipslays/array`](https://github.com/chipslays/array) library.
 
-> Supported dot-notation and asterisks rules.
+> ℹ Supported dot-notation and asterisks rules.
+
+The purpose of this library is to provide a generic class for interacting with arrays of data. Convenient support for dot notation and asterisk keys.
 
 ## Installation
 
