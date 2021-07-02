@@ -128,4 +128,13 @@ final class CollectionTest extends TestCase
 
         $this->assertEquals([3, 4, 5], $result);
     }
+
+    public function testCollectionСollectMethod()
+    {
+        $result = (new Collection(['data' => range(1,5)]))->collect('data')->map(function ($item) {
+            return 1;
+        })->toArray();
+
+        $this->assertEquals([1, 1, 1, 1, 1], $result);
+    }
 }
