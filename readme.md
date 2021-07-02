@@ -15,6 +15,8 @@ $ composer require chipslays/collection
 
 ## Documentation
 
+> Collection can created by helper function `collection()`.
+
 #### `get(string $key [, $default = null, string $separator = '.'])`
 
 Get item from collection by using dot notation.
@@ -127,11 +129,11 @@ $hasEmail = $collection->has('user.email'); // false
 #### `shift(): mixed`
 #### `values(): Collection`
 #### `keys(): Collection`
-#### `chunk(int $size)`
-#### `each(callable $callback): Collection`
-#### `map(callable $callback): Collection`
-#### `mapWithKeys(callable $callback): Collection`
-#### `filter(callable $callback = null): Collection`
+#### `chunk(int $size): Collection`
+#### `each(callable $callback($item)): Collection`
+#### `map(callable $callback($item)): Collection`
+#### `mapWithKeys(callable $callback($item)): Collection`
+#### `filter(callable $callback($item, $key) = null): Collection`
 #### `where($key, $operator = null, $value = null): Collection`
 #### `all(): array`
 
