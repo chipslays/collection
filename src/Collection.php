@@ -51,14 +51,34 @@ class Collection implements Countable, ArrayAccess
         return $this;
     }
 
+    /**
+     * Return first value from collection.
+     *
+     * @return mixed
+     */
     public function first()
     {
         return array_values($this->items)[0] ?? null;
     }
 
+    /**
+     * Return last value from collection.
+     *
+     * @return mixed
+     */
     public function last()
     {
         return $this->items !== [] ? end($this->items) : null;
+    }
+
+    /**
+     * @param string $key
+     * @param string $separator
+     * @return static
+     */
+    public function collect(string $key, string $separator = '.')
+    {
+        return new static($this->get($key, [], $separator));
     }
 
     /**
@@ -98,7 +118,7 @@ class Collection implements Countable, ArrayAccess
     /**
      * Execute a callback over each item.
      *
-     * @param  callable  $callback
+     * @param callable $callback
      * @return Collection
      */
     public function each(callable $callback): Collection
@@ -115,7 +135,7 @@ class Collection implements Countable, ArrayAccess
     /**
      * Run a map over each of the items.
      *
-     * @param  callable  $callback
+     * @param callable $callback
      * @return static
      */
     public function map(callable $callback): Collection
@@ -132,7 +152,7 @@ class Collection implements Countable, ArrayAccess
      *
      * The callback should return an associative array with a single key/value pair.
      *
-     * @param  callable  $callback
+     * @param callable $callback
      * @return static
      */
     public function mapWithKeys(callable $callback): Collection
@@ -153,8 +173,8 @@ class Collection implements Countable, ArrayAccess
     /**
      * Run a filter over each of the items.
      *
-     * @param  callable|null  $callback
-     * @return static
+     * @param callable|null $callback
+     * @returnstatic
      */
     public function filter(callable $callback = null): Collection
     {
@@ -168,9 +188,9 @@ class Collection implements Countable, ArrayAccess
     /**
      * Filter items by the given key value pair.
      *
-     * @param  string  $key
-     * @param  mixed  $operator
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed $operator
+     * @param mixed $value
      * @return static
      */
     public function where($key, $operator = null, $value = null): Collection
