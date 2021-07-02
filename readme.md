@@ -136,6 +136,7 @@ $hasEmail = $collection->has('user.email'); // false
 #### `filter(callable $callback($item, $key) = null): Collection`
 #### `where($key, $operator = null, $value = null): Collection`
 #### `all(): array`
+#### `collect(string $key, string $separator = '.')`
 
 #### `count(): int`
 
