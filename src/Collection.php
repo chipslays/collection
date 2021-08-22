@@ -40,7 +40,7 @@ class Collection implements Countable, ArrayAccess
      * Set/overwrite item in collection using by dot notation key.
      *
      * @param string $key
-     * @param mixed $default
+     * @param mixed $value
      * @param string $separator
      *
      * @return Collection
@@ -48,6 +48,19 @@ class Collection implements Countable, ArrayAccess
     public function set(string $key, $value = null, string $separator = '.'): Collection
     {
         Arr::set($this->items, $key, $value, $separator);
+        return $this;
+    }
+    
+    /**
+     * Add item to end of items.
+     *
+     * @param mixed $value
+     *
+     * @return Collection
+     */
+    public function push($value): Collection
+    {
+        $this->items[] = $value;
         return $this;
     }
 
