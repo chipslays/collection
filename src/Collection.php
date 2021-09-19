@@ -85,6 +85,15 @@ class Collection implements Countable, ArrayAccess
     }
 
     /**
+     * @param int $count
+     * @return mixed
+     */
+    public function limit(int $count)
+    {
+        return new static(array_chunk($this->items, $count, true)[0] ?? []);
+    }
+
+    /**
      * @return mixed
      */
     public function only($keys)

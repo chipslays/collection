@@ -133,6 +133,7 @@ $hasEmail = $collection->has('user.email'); // false
 #### `keys(): Collection`
 #### `only(): Collection`
 #### `push(): Collection`
+#### `limit(): Collection`
 #### `chunk(int $size): Collection`
 #### `each(callable $callback($item)): Collection`
 #### `map(callable $callback($item)): Collection`

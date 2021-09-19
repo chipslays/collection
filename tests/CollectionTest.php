@@ -144,4 +144,11 @@ final class CollectionTest extends TestCase
 
         $this->assertEquals(['a' => 1, 'd' => 4, 'c' => 3], $result);
     }
+
+    public function testCollectionLimit()
+    {
+        $result = (new Collection(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4]))->limit(2)->all();
+
+        $this->assertEquals(['a' => 1, 'b' => 2], $result);
+    }
 }
