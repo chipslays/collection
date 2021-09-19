@@ -137,4 +137,11 @@ final class CollectionTest extends TestCase
 
         $this->assertEquals([1, 1, 1, 1, 1], $result);
     }
+
+    public function testCollectionOnly()
+    {
+        $result = (new Collection(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4]))->only(['a', 'd', 'c'])->all();
+
+        $this->assertEquals(['a' => 1, 'd' => 4, 'c' => 3], $result);
+    }
 }

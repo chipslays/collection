@@ -50,7 +50,7 @@ class Collection implements Countable, ArrayAccess
         Arr::set($this->items, $key, $value, $separator);
         return $this;
     }
-    
+
     /**
      * Add item to end of items.
      *
@@ -82,6 +82,20 @@ class Collection implements Countable, ArrayAccess
     public function last()
     {
         return $this->items !== [] ? end($this->items) : null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function only($keys)
+    {
+        $items = [];
+
+        foreach ($keys as $key) {
+            $items[$key] = $this->items[$key] ?? null;
+        }
+
+        return new static($items);
     }
 
     /**

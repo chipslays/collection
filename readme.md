@@ -131,6 +131,8 @@ $hasEmail = $collection->has('user.email'); // false
 #### `shift(): mixed`
 #### `values(): Collection`
 #### `keys(): Collection`
+#### `only(): Collection`
+#### `push(): Collection`
 #### `chunk(int $size): Collection`
 #### `each(callable $callback($item)): Collection`
 #### `map(callable $callback($item)): Collection`
