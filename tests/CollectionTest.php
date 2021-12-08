@@ -151,4 +151,23 @@ final class CollectionTest extends TestCase
 
         $this->assertEquals(['a' => 1, 'b' => 2], $result);
     }
+
+    public function testCollectionReplaceRecursive()
+    {
+        $result = (new Collection([
+            'names' => [
+                'first' => 'test',
+            ]
+        ]))->replaceRecursive([
+            'names' => [
+                'first' => 'replaced',
+            ]
+        ])->all();
+
+        $this->assertEquals([
+            'names' => [
+                'first' => 'replaced',
+            ]
+        ], $result);
+    }
 }

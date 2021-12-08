@@ -65,6 +65,58 @@ class Collection implements Countable, ArrayAccess
     }
 
     /**
+     * Replaces elements from passed arrays into the current items recursively.
+     *
+     * @param array $items
+     *
+     * @return Collection
+     */
+    public function replace(array ...$items): Collection
+    {
+        $this->items = array_replace_recursive($this->items, ...$items);
+        return $this;
+    }
+
+    /**
+     * Replaces elements from passed arrays into the current items.
+     *
+     * @param array $items
+     *
+     * @return Collection
+     */
+    public function replaceRecursive(array ...$items): Collection
+    {
+        $this->items = array_replace_recursive($this->items, ...$items);
+        return $this;
+    }
+
+    /**
+     * Merge one or more items.
+     *
+     * @param array $items
+     *
+     * @return Collection
+     */
+    public function merge(array ...$items): Collection
+    {
+        $this->items = array_merge($this->items, ...$items);
+        return $this;
+    }
+
+    /**
+     * Merge one or more items recursively
+     *
+     * @param array $items
+     *
+     * @return Collection
+     */
+    public function mergeRecursive(array ...$items): Collection
+    {
+        $this->items = array_merge_recursive($this->items, ...$items);
+        return $this;
+    }
+
+    /**
      * Return first value from collection.
      *
      * @return mixed
