@@ -140,6 +140,8 @@ $hasEmail = $collection->has('user.email'); // false
 #### `replaceRecursive(): Collection`
 #### `merge(): Collection`
 #### `mergeRecursive(): Collection`
+#### `trim(): Collection`
+#### `remove(...string $keys): Collection`
 #### `limit(): Collection`
 #### `chunk(int $size): Collection`
 #### `each(callable $callback($item)): Collection`

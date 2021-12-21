@@ -170,4 +170,27 @@ final class CollectionTest extends TestCase
             ]
         ], $result);
     }
+
+    public function testCollectionRemove()
+    {
+        $result = (new Collection([
+            ['a' => '123'],
+            ['b' => '123'],
+            ['c' => '123'],
+        ]))->remove('a', 'c')->trim()->first();
+
+        $this->assertEquals(['b' => '123'], $result);
+    }
+
+    public function testCollectionTrim()
+    {
+        $result = (new Collection([
+            [],
+            ['b' => '123'],
+            null,
+            false,
+        ]))->trim()->values()->all();
+
+        $this->assertEquals([['b' => '123']], $result);
+    }
 }

@@ -5,14 +5,17 @@ namespace Chipslays\Collection;
 use Chipslays\Arr\Arr;
 use Countable;
 use ArrayAccess;
+use Iterator;
 use stdClass;
 
-class Collection implements Countable, ArrayAccess
+class Collection implements Countable, ArrayAccess, Iterator
 {
     /**
      * @var array
      */
     protected $items = [];
+
+    protected $position = 0;
 
     /**
      * @param array|stdClass $items
@@ -262,7 +265,7 @@ class Collection implements Countable, ArrayAccess
      * Run a filter over each of the items.
      *
      * @param callable|null $callback
-     * @returnstatic
+     * @return static
      */
     public function filter(callable $callback = null): Collection
     {
@@ -477,5 +480,55 @@ class Collection implements Countable, ArrayAccess
     public function offsetGet($offset)
     {
         return isset($this->items[$offset]) ? $this->items[$offset] : null;
+    }
+
+    /**
+     * Remove items by key name.
+     *
+     * @param string ...$keys
+     * @return static
+     */
+    public function remove(...$keys)
+    {
+        $items = $this->items;
+
+        foreach ($keys as $key) {
+            foreach ($items as &$value) {
+                if (!isset($value[$key])) continue;
+                unset($value[$key]);
+            }
+        }
+
+        return new static($items);
+    }
+
+    /**
+     * @return static
+     */
+    public function trim()
+    {
+        $items = array_filter($this->items);
+
+        return new static($items);
+    }
+
+    public function rewind() {
+        $this->position = 0;
+    }
+
+    public function current() {
+        return $this->items[$this->position];
+    }
+
+    public function key() {
+        return $this->position;
+    }
+
+    public function next() {
+        ++$this->position;
+    }
+
+    public function valid() {
+        return isset($this->items[$this->position]);
     }
 }
