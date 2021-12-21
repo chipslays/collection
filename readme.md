@@ -34,6 +34,9 @@ $collection = new Collection([
 
 $name = $collection->get('user.name'); // chipslays
 $email = $collection->get('user.email', 'default@email.com'); // default@email.com
+
+$array = $collection->user; // array('name' => 'chipslays')
+$name = $collection->user['name']; // chipslays
 ```
 
 ```php
