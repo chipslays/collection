@@ -3,7 +3,7 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/chipslays/collection/Tests)
 ![Packagist Version](https://img.shields.io/packagist/v/chipslays/collection)
 
-Simple library for manipulating array or object as collection based on [`chipslays/array`](https://github.com/chipslays/array) library.
+Simple library for manipulating array or object as collection.
 
 > ℹ Supported dot-notation and asterisks rules.
 
