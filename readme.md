@@ -130,11 +130,78 @@ $hasName = $collection->has('user.name'); // true
 $hasEmail = $collection->has('user.email'); // false
 ```
 #### `first(): mixed`
+
+Returns first item from collection.
+
+```php
+use Chipslays\Collection\Collection;
+
+$collection = new Collection(['foo', 'bar', 'baz']);
+
+echo $collection->first(); // foo
+```
+
 #### `last(): mixed`
+
+Returns last item from collection.
+
+```php
+use Chipslays\Collection\Collection;
+
+$collection = new Collection(['foo', 'bar', 'baz']);
+
+echo $collection->last(); // baz
+```
+
 #### `shift(): mixed`
+
+Getting first item and remove her from collection.
+
+```php
+use Chipslays\Collection\Collection;
+
+$collection = new Collection(['foo', 'bar', 'baz']);
+
+echo $collection->shift(); // foo
+echo $collection->count(); // 2
+```
+
 #### `values(): Collection`
+
+Returns values without keys as collection.
+
+```php
+use Chipslays\Collection\Collection;
+
+$collection = new Collection(['color' => 'green', 'name' => 'apple']);
+
+print_r($collection->values()); // collection(green, apple)
+```
+
 #### `keys(): Collection`
+
+Returns keys without values as collection.
+
+```php
+use Chipslays\Collection\Collection;
+
+$collection = new Collection(['color' => 'green', 'name' => 'apple']);
+
+print_r($collection->keys()); // collection(color, name)
+```
+
 #### `only(): Collection`
+
+Returns only selected keys.
+
+```php
+use Chipslays\Collection\Collection;
+
+$collection = new Collection(['color' => 'green', 'name' => 'apple']);
+
+print_r($collection->only(['color'])); // collection(color => green)
+```
+
 #### `push(): Collection`
 #### `replace(): Collection`
 #### `replaceRecursive(): Collection`
