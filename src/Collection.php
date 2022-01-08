@@ -458,7 +458,7 @@ class Collection implements Countable, ArrayAccess, Iterator
         return $this->has($key);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->items[] = $value;
@@ -467,17 +467,17 @@ class Collection implements Countable, ArrayAccess, Iterator
         }
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->items[$offset]);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->items[$offset]);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return isset($this->items[$offset]) ? $this->items[$offset] : null;
     }
@@ -512,7 +512,7 @@ class Collection implements Countable, ArrayAccess, Iterator
         return new static($items);
     }
 
-    public function rewind() {
+    public function rewind(): void {
         $this->position = 0;
     }
 
@@ -524,11 +524,11 @@ class Collection implements Countable, ArrayAccess, Iterator
         return $this->position;
     }
 
-    public function next() {
+    public function next(): void {
         ++$this->position;
     }
 
-    public function valid() {
+    public function valid(): bool {
         return isset($this->items[$this->position]);
     }
 }
