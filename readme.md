@@ -218,6 +218,7 @@ print_r($collection->only(['color'])); // collection(color => green)
 #### `where($key, $operator = null, $value = null): Collection`
 #### `all(): array`
 #### `collect(string $key, string $separator = '.')`
+#### `reverse(bool $preserveKeys)`
 
 #### `count(): int`
 
@@ -293,4 +294,3 @@ Array
 
 ## License
 MIT
-

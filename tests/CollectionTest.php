@@ -193,4 +193,10 @@ final class CollectionTest extends TestCase
 
         $this->assertEquals([['b' => '123']], $result);
     }
+
+    public function testCollectionReverse()
+    {
+        $result = (new Collection([1, 2, 3]))->reverse()->all();
+        $this->assertEquals([3, 2, 1], $result);
+    }
 }

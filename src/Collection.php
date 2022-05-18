@@ -531,4 +531,15 @@ class Collection implements Countable, ArrayAccess, Iterator
     public function valid(): bool {
         return isset($this->items[$this->position]);
     }
+
+    /**
+     * Return an collection with elements in reverse order.
+     *
+     * @param bool $preserveKeys
+     * @return static
+     */
+    public function reverse(bool $preserveKeys = false)
+    {
+        return new static(array_reverse($this->items, $preserveKeys));
+    }
 }
