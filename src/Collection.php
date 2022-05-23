@@ -542,4 +542,15 @@ class Collection implements Countable, ArrayAccess, Iterator
     {
         return new static(array_reverse($this->items, $preserveKeys));
     }
+
+    /**
+     * Modify collection by given callback.
+     *
+     * @param callable $callback
+     * @return static
+     */
+    public function callback(callable $callback): static
+    {
+        return new static(call_user_func($callback, $this->items));
+    }
 }
