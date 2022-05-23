@@ -199,4 +199,13 @@ final class CollectionTest extends TestCase
         $result = (new Collection([1, 2, 3]))->reverse()->all();
         $this->assertEquals([3, 2, 1], $result);
     }
+
+    public function testCollectionCallback()
+    {
+        $result = (new Collection([1, 3, 5, 4, 2]))->callback(function ($items) {
+            sort($items);
+            return $items;
+        })->all();
+        $this->assertEquals([1, 2, 3, 4, 5], $result);
+    }
 }
