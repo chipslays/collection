@@ -549,7 +549,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      * @param callable $callback
      * @return static
      */
-    public function callback(callable $callback): static
+    public function callback(callable $callback)
     {
         return new static(call_user_func($callback, $this->items));
     }
