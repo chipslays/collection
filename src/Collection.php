@@ -13,16 +13,16 @@ class Collection implements Countable, ArrayAccess, Iterator
     /**
      * @var array
      */
-    protected $items = [];
+    protected $data = [];
 
     protected $position = 0;
 
     /**
      * @param array|stdClass $items
      */
-    public function __construct($items = [])
+    public function __construct($data = [])
     {
-        $this->items = (array) $items;
+        $this->data = (array) $data;
     }
 
     /**
@@ -36,7 +36,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function get(string $key, $default = null, string $separator = '.')
     {
-        return Arr::get($this->items, $key, $default, $separator);
+        return Arr::get($this->data, $key, $default, $separator);
     }
 
     /**
@@ -50,7 +50,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function set(string $key, $value = null, string $separator = '.'): Collection
     {
-        Arr::set($this->items, $key, $value, $separator);
+        Arr::set($this->data, $key, $value, $separator);
         return $this;
     }
 
@@ -63,7 +63,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function push($value): Collection
     {
-        $this->items[] = $value;
+        $this->data[] = $value;
         return $this;
     }
 
@@ -76,7 +76,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function replace(array ...$items): Collection
     {
-        $this->items = array_replace_recursive($this->items, ...$items);
+        $this->data = array_replace_recursive($this->data, ...$items);
         return $this;
     }
 
@@ -89,7 +89,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function replaceRecursive(array ...$items): Collection
     {
-        $this->items = array_replace_recursive($this->items, ...$items);
+        $this->data = array_replace_recursive($this->data, ...$items);
         return $this;
     }
 
@@ -102,7 +102,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function merge(array ...$items): Collection
     {
-        $this->items = array_merge($this->items, ...$items);
+        $this->data = array_merge($this->data, ...$items);
         return $this;
     }
 
@@ -115,7 +115,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function mergeRecursive(array ...$items): Collection
     {
-        $this->items = array_merge_recursive($this->items, ...$items);
+        $this->data = array_merge_recursive($this->data, ...$items);
         return $this;
     }
 
@@ -126,7 +126,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function first()
     {
-        return array_values($this->items)[0] ?? null;
+        return array_values($this->data)[0] ?? null;
     }
 
     /**
@@ -136,7 +136,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function last()
     {
-        return $this->items !== [] ? end($this->items) : null;
+        return $this->data !== [] ? end($this->data) : null;
     }
 
     /**
@@ -145,7 +145,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function limit(int $count)
     {
-        return new static(array_chunk($this->items, $count, true)[0] ?? []);
+        return new static(array_chunk($this->data, $count, true)[0] ?? []);
     }
 
     /**
@@ -156,7 +156,7 @@ class Collection implements Countable, ArrayAccess, Iterator
         $items = [];
 
         foreach ($keys as $key) {
-            $items[$key] = $this->items[$key] ?? null;
+            $items[$key] = $this->data[$key] ?? null;
         }
 
         return new static($items);
@@ -182,7 +182,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function has(string $key, string $separator = '.'): bool
     {
-        return Arr::has($this->items, $key, $separator);
+        return Arr::has($this->data, $key, $separator);
     }
 
     /**
@@ -192,7 +192,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function count(): int
     {
-        return count($this->items);
+        return count($this->data);
     }
 
     /**
@@ -202,7 +202,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function clear(): Collection
     {
-        $this->items = [];
+        $this->data = [];
         return $this;
     }
 
@@ -214,7 +214,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function each(callable $callback): Collection
     {
-        foreach ($this->items as $key => $item) {
+        foreach ($this->data as $key => $item) {
             if (call_user_func($callback, $item, $key) === false) {
                 break;
             }
@@ -231,9 +231,9 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function map(callable $callback): Collection
     {
-        $keys = array_keys($this->items);
+        $keys = array_keys($this->data);
 
-        $items = array_map($callback, $this->items, $keys);
+        $items = array_map($callback, $this->data, $keys);
 
         return new static(array_combine($keys, $items));
     }
@@ -250,7 +250,7 @@ class Collection implements Countable, ArrayAccess, Iterator
     {
         $result = [];
 
-        foreach ($this->items as $key => $value) {
+        foreach ($this->data as $key => $value) {
             $assoc = $callback($value, $key);
 
             foreach ($assoc as $mapKey => $mapValue) {
@@ -270,10 +270,10 @@ class Collection implements Countable, ArrayAccess, Iterator
     public function filter(callable $callback = null): Collection
     {
         if ($callback) {
-            return new static(Arr::where($this->items, $callback));
+            return new static(Arr::where($this->data, $callback));
         }
 
-        return new static(array_filter($this->items));
+        return new static(array_filter($this->data));
     }
 
     /**
@@ -358,7 +358,7 @@ class Collection implements Countable, ArrayAccess, Iterator
 
         $chunks = [];
 
-        foreach (array_chunk($this->items, $size, true) as $chunk) {
+        foreach (array_chunk($this->data, $size, true) as $chunk) {
             $chunks[] = new static($chunk);
         }
 
@@ -372,7 +372,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function shift()
     {
-        return array_shift($this->items);
+        return array_shift($this->data);
     }
 
     /**
@@ -382,7 +382,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function values()
     {
-        return new static(array_values($this->items));
+        return new static(array_values($this->data));
     }
 
     /**
@@ -390,7 +390,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function keys()
     {
-        return new static(array_keys($this->items));
+        return new static(array_keys($this->data));
     }
 
     /**
@@ -410,7 +410,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function toJson($flags = JSON_PRETTY_PRINT): string
     {
-        return json_encode($this->items, $flags);
+        return json_encode($this->data, $flags);
     }
 
     /**
@@ -420,7 +420,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function toObject(): object
     {
-        return (object) $this->items;
+        return (object) $this->data;
     }
 
     /**
@@ -430,7 +430,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function toArray(): array
     {
-        return $this->items;
+        return $this->data;
     }
 
     /**
@@ -440,7 +440,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function __toString()
     {
-        return print_r($this->items, true);
+        return print_r($this->data, true);
     }
 
     public function __get($key)
@@ -461,25 +461,25 @@ class Collection implements Countable, ArrayAccess, Iterator
     public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
-            $this->items[] = $value;
+            $this->data[] = $value;
         } else {
-            $this->items[$offset] = $value;
+            $this->data[$offset] = $value;
         }
     }
 
     public function offsetExists($offset): bool
     {
-        return isset($this->items[$offset]);
+        return isset($this->data[$offset]);
     }
 
     public function offsetUnset($offset): void
     {
-        unset($this->items[$offset]);
+        unset($this->data[$offset]);
     }
 
     public function offsetGet($offset): mixed
     {
-        return isset($this->items[$offset]) ? $this->items[$offset] : null;
+        return isset($this->data[$offset]) ? $this->data[$offset] : null;
     }
 
     /**
@@ -490,7 +490,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function remove(...$keys)
     {
-        $items = $this->items;
+        $items = $this->data;
 
         foreach ($keys as $key) {
             foreach ($items as &$value) {
@@ -507,7 +507,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function trim()
     {
-        $items = array_filter($this->items);
+        $items = array_filter($this->data);
 
         return new static($items);
     }
@@ -517,7 +517,7 @@ class Collection implements Countable, ArrayAccess, Iterator
     }
 
     public function current(): mixed {
-        return $this->items[$this->position];
+        return $this->data[$this->position];
     }
 
     public function key(): mixed {
@@ -529,7 +529,7 @@ class Collection implements Countable, ArrayAccess, Iterator
     }
 
     public function valid(): bool {
-        return isset($this->items[$this->position]);
+        return isset($this->data[$this->position]);
     }
 
     /**
@@ -540,7 +540,7 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function reverse(bool $preserveKeys = false)
     {
-        return new static(array_reverse($this->items, $preserveKeys));
+        return new static(array_reverse($this->data, $preserveKeys));
     }
 
     /**
@@ -551,6 +551,6 @@ class Collection implements Countable, ArrayAccess, Iterator
      */
     public function callback(callable $callback)
     {
-        return new static(call_user_func($callback, $this->items));
+        return new static(call_user_func($callback, $this->data));
     }
 }
