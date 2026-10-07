@@ -1,0 +1,71 @@
+{
+    "name": "collection/collection",
+    "description": "Laravel-compatible PHP collection with dot-notation and wildcard paths in every method. Zero dependencies.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["collection", "collections", "laravel", "laravel-collection", "illuminate", "dot-notation", "wildcard", "array", "arr", "data-get", "data-set", "fluent", "zero-dependencies", "php8", "helpers", "utils", "utility", "data", "list", "collect", "iterable", "json", "sort", "filter", "map", "pluck", "group-by"],
+    "homepage": "https://github.com/chipslays/collection",
+    "support": {
+        "issues": "https://github.com/chipslays/collection/issues",
+        "source": "https://github.com/chipslays/collection",
+        "docs": "https://github.com/chipslays/collection/tree/main/docs"
+    },
+    "authors": [
+        {
+            "name": "chipslays",
+            "homepage": "https://github.com/chipslays"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.32",
+        "pestphp/pest": "^3.0 || ^4.0",
+        "phpstan/phpstan": "^2.3",
+        "symfony/var-dumper": "^7.0 || ^8.0"
+    },
+    "suggest": {
+        "symfony/var-dumper": "Pretty output for dump() (falls back to var_dump() without it)"
+    },
+    "archive": {
+        "exclude": ["/tests", "/docs", "/examples", "/.github", "/.gitattributes", "/.gitignore", "/phpstan.neon", "/phpunit.xml", "/pint.json"]
+    },
+    "autoload": {
+        "psr-4": {
+            "Collection\\": "src/"
+        },
+        "files": [
+            "helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "php vendor/bin/pest",
+        "analyse": "php vendor/bin/phpstan analyse --no-progress --memory-limit=1G",
+        "lint": "php vendor/bin/pint --test",
+        "format": "php vendor/bin/pint",
+        "verify": ["@lint", "@analyse", "@test"]
+    },
+    "scripts-descriptions": {
+        "test": "Run the Pest test suite",
+        "analyse": "Run PHPStan static analysis",
+        "lint": "Check code style with Pint (no changes)",
+        "format": "Fix code style with Pint",
+        "verify": "Run lint, static analysis and tests"
+    }
+}
